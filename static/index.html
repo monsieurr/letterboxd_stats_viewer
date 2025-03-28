@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letterboxd Stats</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <button id="toggle-sidebar" class="hamburger-menu">☰</button>
+
+        
+        <!-- Nouveau menu latéral -->
+        <nav class="sidebar">
+            <h1>Letterboxd Stats</h1>
+            <div class="menu-items">
+                <div class="menu-header">Summary Stats</div>
+                <div class="menu-item active" data-view="stats">Dashboard</div>
+                
+                <div class="menu-header">Raw Data Explorer</div>
+                <div class="menu-item" data-file="watched">Watched Films</div>
+                <div class="menu-item" data-file="watchlist">Watchlist</div>
+                <div class="menu-item" data-file="reviews">Reviews</div>
+                <div class="menu-item" data-file="ratings">Ratings</div>
+                <div class="menu-item" data-file="comments">Comments</div>
+
+
+                <div class="theme-switcher">
+                    <div class="menu-header">Theme</div>
+                    <select id="theme-select" class="menu-item">
+                        <option value="default">Forest Green</option>
+                        <option value="dark">Midnight Blue</option>
+                        <option value="warm">Autumn Orange</option>
+                        <option value="light">Daylight</option>
+                        <option value="bee">Bee Yellow</option>
+                        <option value="contrast">High Contrast</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
+
+        
+
+        <!-- Contenu principal modifié -->
+        <main class="content">
+            <div class="controls" style="display: none;">
+                <input type="text" id="search" placeholder="Search...">
+                <select id="filter-column">
+                    <option value="">All Columns</option>
+                </select>
+            </div>
+            
+            <!-- Section des statistiques originales -->
+            <div class="stats-view">
+                <div class="loading-spinner"></div>
+                <div class="error-container"></div>
+                <div class="stats-grid">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3>Watched Films</h3>
+                            <p id="total-watched">-</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Watchlist Length</h3>
+                            <p id="watchlist-length">-</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Average Rating</h3>
+                            <p id="average-rating">-</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Total Reviews</h3>
+                            <p id="total-reviews">-</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Most Active Year</h3>
+                            <p id="top-year">-</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Most Used Tags</h3>
+                            <p id="top-tags">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nouveau conteneur pour le tableau -->
+            <div id="table-container" class="table-view" style="display: none;"></div>
+        </main>
+    </div>
+    <script src="/app.js"></script>
+</body>
+</html>

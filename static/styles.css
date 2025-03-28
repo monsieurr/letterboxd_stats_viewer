@@ -1,0 +1,562 @@
+:root {
+    /* Colors */
+    --dark-bg: #0d1a0d;
+    --surface: #1a2a1a;
+    --primary: #2d5a2d;
+    --secondary: #3d7a3d;
+    --accent: #5f9e5f;
+    --text-primary: #e0f0e0;
+    --text-secondary: #a0c0a0;
+    --error: #ff4d4d;
+    --border-color-light: rgba(255, 255, 255, 0.1); /* Added Variable */
+    --focus-ring-color: var(--accent); /* Added for focus */
+
+    /* Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Spacing (Optional but recommended) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem; /* Example: used for small padding/gap */
+    --space-lg: 1rem;    /* Example: used for medium padding/gap */
+    --space-xl: 1.5rem;  /* Example: used for larger padding/gap */
+    --space-xxl: 2rem;   /* Example: used for main padding */
+
+    /* Transitions */
+    --transition-duration: 0.25s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    /* Combine duration and timing for easier use */
+    --transition-base: var(--transition-duration) var(--transition-timing);
+    --theme-transition: background-color 0.5s ease, color 0.3s ease;
+
+}
+
+/* Additional themes */
+[data-theme="dark"] {
+    --dark-bg: #0a0a1a;
+    --surface: #1a1a2a;
+    --primary: #2d2d5a;
+    --secondary: #3d3d7a;
+    --accent: #5f5f9e;
+}
+
+[data-theme="warm"] {
+    --dark-bg: #1a0d0d;
+    --surface: #2a1a1a;
+    --primary: #5a2d2d;
+    --secondary: #7a3d3d;
+    --accent: #9e5f5f;
+}
+
+[data-theme="light"] {
+    --dark-bg: #f0f0f0;
+    --surface: #ffffff;
+    --primary: #2d5a2d;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+}
+
+/* New Theme: Bee Yellow */
+[data-theme="bee"] {
+    --dark-bg: #000000;
+    --surface: #1a1a1a;
+    --primary: #4d4d00;
+    --secondary: #666600;
+    --accent: #ffff00;
+    --text-primary: #ffffcc;
+    --text-secondary: #cccc00;
+    --border-color-light: rgba(255, 255, 0, 0.1);
+}
+
+
+/* New Theme: High Contrast */
+[data-theme="contrast"] {
+    --dark-bg: #000000;
+    --surface: #000033;
+    --primary: #00008b;
+    --secondary: #0000cd;
+    --accent: #ffffff;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0ff;
+    --error: #ff0000;
+}
+
+.theme-switcher {
+    margin-top: auto; /* Pushes to bottom of sidebar */
+    padding-top: var(--space-xl);
+    color: --dark-bg;
+    background: --surface;
+}
+
+#theme-select {
+    width: 100%;
+    margin: var(--space-xs) 0;
+    background: var(--surface);
+    border: 1px solid var(--border-color-light);
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Added */
+    -moz-osx-font-smoothing: grayscale; /* Added */
+    text-rendering: optimizeLegibility; /* Added */
+    transition: var(--theme-transition);
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+.sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    transition: width 0.3s ease, padding 0.3s ease, border 0.3s ease;
+    overflow: hidden;
+    padding: var(--space-xl) var(--space-lg);
+}
+
+.sidebar.hidden {
+    width: 0;
+    padding: 0;
+    border-right: none;
+}
+
+.content {
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+}
+
+.menu-header {
+    padding: var(--space-lg) 0 var(--space-sm);
+    font-size: 0.9rem;
+    font-weight: 500; /* Added for clarity */
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.menu-item {
+    display: block; /* Ensure padding applies correctly */
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-xs) 0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-decoration: none; /* Add if these are links */
+    color: var(--text-primary); /* Ensure default color */
+    position: relative;
+    overflow: hidden;
+    /* Specify transitioned properties */
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+/* Simplified ::before - assumes it's a subtle background layer */
+.menu-item::before {
+    content: '';
+    position: absolute;
+    top: 0; /* Added */
+    left: 0; /* Changed from -100% */
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    opacity: 0; /* Start invisible */
+    z-index: -1; /* Ensure it's behind text */
+    transition: opacity var(--transition-base);
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.menu-item.active {
+    background: var(--primary);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Example: Add focus style for keyboard navigation */
+.menu-item:focus-visible {
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+    background: rgba(255, 255, 255, 0.08); /* Slightly different from hover */
+}
+
+/* Main Content */
+.content {
+    padding: var(--space-xxl); /* Use variables */
+    background: var(--dark-bg);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl); /* Use variables */
+    padding: var(--space-lg) 0; /* Vertical padding */
+}
+
+.stat-card {
+    background: var(--surface);
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color-light); /* Use variable */
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    will-change: transform, box-shadow; /* Performance hint */
+    transition: var(--theme-transition), transform var(--transition-base);
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Add focus style if card is interactive (e.g., a link wrapper) */
+.stat-card:focus-within { /* Or :focus-visible if card itself is focusable */
+    outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+    transform: translateY(-3px); /* Mirror hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Mirror hover */
+}
+
+
+.stat-card h3 {
+    margin: 0 0 var(--space-lg);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Table & Controls */
+.controls {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens if needed */
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xxl);
+}
+
+#search,
+#filter-column {
+    padding: var(--space-md) var(--space-xl); /* Consistent padding */
+    background: var(--surface);
+    border: 1px solid var(--border-color-light); /* Use variable */
+    color: var(--text-primary);
+    border-radius: var(--radius-md);
+    font-family: inherit; /* Ensure font consistency */
+    font-size: inherit; /* Ensure font consistency */
+    transition: border-color var(--transition-base); /* Specific transition */
+}
+
+#search {
+    flex: 1 1 200px; /* Allow shrinking but prefer growing */
+}
+
+/* Style focus state for IDs */
+#search:focus,
+#filter-column:focus {
+    border-color: var(--accent);
+    outline: none; /* We use border for focus */
+}
+
+/* Use focus-visible for keyboard users (Still recommended) */
+#search:focus-visible,
+#filter-column:focus-visible {
+    outline: 2px solid var(--focus-ring-color); /* Use variable */
+    outline-offset: 1px;
+    border-color: transparent; /* Hide border when outline is visible */
+}
+
+/* Basic select reset for ID (more needed for full custom look) */
+#filter-column {
+    /* appearance: none; */ /* Uncomment for custom arrow */
+    background-color: var(--surface); /* Explicit background */
+    cursor: pointer;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: separate; /* Keep for border-radius */
+    border-spacing: 0;
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    overflow: hidden; /* Keep for border-radius clipping */
+}
+
+thead { /* Added thead for semantics and sticky positioning */
+    position: sticky;
+    top: 0;
+    z-index: 10; /* Ensure it stays above scrolling body */
+}
+
+th {
+    padding: var(--space-lg);
+    background: var(--primary);
+    color: var(--text-primary); /* Ensure contrast */
+    font-weight: 600;
+    text-align: left;
+    /* position: sticky and top: 0 moved to thead */
+}
+
+tbody tr:hover { /* Apply hover to TR directly */
+     background: rgba(255, 255, 255, 0.02);
+}
+
+td {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--border-color-light); /* Use variable */
+    /* Transition background if needed, but applied to TR is often better */
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* Loading & Errors */
+.loading-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid var(--accent);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: var(--space-xxl) auto; /* Center if needed */
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-container {
+    background: var(--error);
+    color: white;
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    margin: var(--space-xxl) 0;
+}
+
+/* Micro-interactions */
+button, /* Add button styles if you use buttons */
+.button { /* Example class for button-like elements */
+    cursor: pointer;
+    padding: var(--space-md) var(--space-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--primary);
+    color: var(--text-primary);
+    font-weight: 500;
+    transition: transform 0.1s ease-out, background-color var(--transition-base);
+}
+button:hover, .button:hover {
+    background-color: var(--secondary);
+}
+button:focus-visible, .button:focus-visible {
+     outline: 2px solid var(--focus-ring-color);
+    outline-offset: 2px;
+}
+button:active, .button:active {
+    transform: scale(0.98);
+}
+
+
+.movie-link {
+    color: var(--accent);
+    text-decoration: none;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.external-icon {
+    font-size: 0.8em;
+    opacity: 0.7;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.movie-link:hover .external-icon,
+.movie-link:focus-visible .external-icon { /* Add focus style */
+    opacity: 1;
+    transform: translate(2px, -2px);
+}
+.movie-link:focus-visible { /* Add focus style */
+     outline: none; /* Style is on the icon */
+}
+
+/* Touch device adjustments */
+@media (hover: none) {
+    .movie-link:hover .external-icon { /* Disable hover move effect */
+      opacity: 0.7;
+      transform: none;
+    }
+    /* Make sure hover background changes don't persist on touch */
+    .menu-item:hover { background: transparent; }
+    .stat-card:hover { transform: none; box-shadow: none; }
+    tbody tr:hover { background: transparent; }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color-light);
+    }
+
+    .sidebar.hidden {
+        height: 0;
+        border-bottom: none;
+    }
+
+    .content.expanded {
+        margin-top: 0;
+    }
+
+    .content {
+      padding: var(--space-xl);
+      /* overflow-x removed, handled by table directly */
+    }
+
+    .stats-grid {
+      /* auto-fit handles this, but can specify if needed */
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .stat-card {
+      padding: var(--space-lg);
+    }
+
+    .stat-card p {
+      font-size: 1.8rem;
+    }
+
+    .controls {
+      flex-direction: column; /* Stack controls */
+      gap: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    #search {
+        min-width: 0; /* Allow full width */
+    }
+
+    /* Make table scrollable horizontally */
+    .table-wrapper { /* Add a wrapper div around the table if needed */
+         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        border-radius: var(--radius-md); /* Apply radius here if table loses it */
+        border: 1px solid var(--border-color-light); /* Optional border for wrapper */
+    }
+    /* If no wrapper, apply overflow to table directly */
+    /* table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    } */
+
+    /* Ensure sticky header works with overflow */
+    thead {
+        /* position: sticky; top: 0; z-index: 10; should still work */
+    }
+
+    th, td {
+      padding: var(--space-md);
+      white-space: nowrap; /* Prevent text wrapping causing height issues */
+      min-width: 120px; /* Adjust as needed */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for small mobile */
+    body {
+        font-size: 0.95rem; /* Slightly smaller base font */
+    }
+    .sidebar {
+        padding: var(--space-md);
+    }
+    .content {
+        padding: var(--space-lg);
+    }
+    .menu-item {
+        padding: var(--space-md);
+        font-size: 0.9rem;
+        transition: var(--theme-transition), transform var(--transition-base);
+    }
+    .stat-card h3 {
+        font-size: 1rem;
+    }
+    .stat-card p {
+        font-size: 1.6rem;
+    }
+    #search,
+    #filter-column {
+        padding: var(--space-md) var(--space-lg);
+    }
+     th, td {
+      padding: var(--space-sm) var(--space-md);
+      min-width: 100px; /* Adjust as needed */
+    }
+}
+
+
+
+/* Table header interactions */
+th {
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+    position: relative;
+}
+
+th:hover {
+    background-color: color-mix(in srgb, var(--primary) 90%, black);
+}
+
+.sort-arrow {
+    margin-left: var(--space-xs);
+    opacity: 0.6;
+    font-size: 0.9em;
+    transition: opacity var(--transition-base);
+}
+
+th:hover .sort-arrow {
+    opacity: 1;
+}
+
+.sort-arrow.active {
+    opacity: 1;
+    color: var(--accent);
+}
+
+/* Styles pour le bouton hamburger */
+.hamburger-menu {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background: var(--surface);
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color-light);
+}

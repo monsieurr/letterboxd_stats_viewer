@@ -1,0 +1,144 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+# Go workspace file
+go.work
+
+# IDE and editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build files
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.out
+*.app
+
+# Directory for generated files
+bin/
+pkg/
+
+# Directory for test coverage reports
+cover.out
+
+# Directory for Go modules
+go.mod
+go.sum
+
+# Directory for Go build cache
+.cache/
+
+# Directory for Go test cache
+testdata/
+
+# Directory for Go build cache
+build/
+
+# Directory for Go build cache
+dist/
+
+# Directory for Go build cache
+tmp/
+
+# Directory for Go build cache
+out/
+
+# Directory for Go build cache
+target/
+
+# Directory for Go build cache
+*.log
+
+# Directory for Go build cache
+*.tmp
+
+# Directory for Go build cache
+*.bak
+
+# Directory for Go build cache
+*.swp
+
+# Directory for Go build cache
+*.swo
+
+# Directory for Go build cache
+*.DS_Store
+
+# Directory for Go build cache
+*.zip
+
+# Directory for Go build cache
+*.tar.gz
+
+# Directory for Go build cache
+*.tar.bz2
+
+# Directory for Go build cache
+*.tar.xz
+
+# Directory for Go build cache
+*.tar
+
+# Directory for Go build cache
+*.gz
+
+# Directory for Go build cache
+*.bz2
+
+# Directory for Go build cache
+*.xz
+
+# Directory for Go build cache
+*.tar
+
+# Directory for Go build cache
+*.zip
+
+# Directory for Go build cache
+*.tar.gz
+
+# Directory for Go build cache
+*.tar.bz2
+
+# Directory for Go build cache
+*.tar.xz
+
+# Directory for Go build cache
+*.tar
+
+# Directory for Go build cache
+*.gz
+
+# Directory for Go build cache
+*.bz2
+
+# Directory for Go build cache
+*.xz
+
+# Directory for Go build cache
+*.tar
+
+# Directory for Go build cache
+
+# Ignorer le dossier stats et son contenu
+stats/

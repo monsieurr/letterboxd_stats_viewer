@@ -1,0 +1,9 @@
+{
+    "dataSources": {
+      "watched": "stats/watched.csv",
+      "watchlist": "stats/watchlist.csv",
+      "reviews": "stats/reviews.csv",
+      "ratings": "stats/ratings.csv",
+      "comments": "stats/comments.csv"
+    }
+  }
