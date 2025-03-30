@@ -41,104 +41,44 @@ pkg/
 # Directory for test coverage reports
 cover.out
 
-# Directory for Go modules
+# Go module files
 go.mod
 go.sum
 
-# Directory for Go build cache
+# Go build cache and temporary files
 .cache/
-
-# Directory for Go test cache
 testdata/
-
-# Directory for Go build cache
 build/
-
-# Directory for Go build cache
 dist/
-
-# Directory for Go build cache
 tmp/
-
-# Directory for Go build cache
 out/
-
-# Directory for Go build cache
 target/
 
-# Directory for Go build cache
+# Logs and temporary files
 *.log
-
-# Directory for Go build cache
 *.tmp
-
-# Directory for Go build cache
 *.bak
 
-# Directory for Go build cache
-*.swp
+# macOS system files
+.DS_Store
 
-# Directory for Go build cache
-*.swo
-
-# Directory for Go build cache
-*.DS_Store
-
-# Directory for Go build cache
+# Archives
 *.zip
-
-# Directory for Go build cache
 *.tar.gz
-
-# Directory for Go build cache
 *.tar.bz2
-
-# Directory for Go build cache
 *.tar.xz
-
-# Directory for Go build cache
 *.tar
-
-# Directory for Go build cache
 *.gz
-
-# Directory for Go build cache
 *.bz2
-
-# Directory for Go build cache
 *.xz
 
-# Directory for Go build cache
-*.tar
-
-# Directory for Go build cache
-*.zip
-
-# Directory for Go build cache
-*.tar.gz
-
-# Directory for Go build cache
-*.tar.bz2
-
-# Directory for Go build cache
-*.tar.xz
-
-# Directory for Go build cache
-*.tar
-
-# Directory for Go build cache
-*.gz
-
-# Directory for Go build cache
-*.bz2
-
-# Directory for Go build cache
-*.xz
-
-# Directory for Go build cache
-*.tar
-
-# Directory for Go build cache
+# Database files
+*.db
+*.sqlite
+*.sqlite3
 
 # Ignorer le dossier stats et son contenu
 stats/
+
+# Fichier .env dans le dossier tmdb
+tmdb/.env

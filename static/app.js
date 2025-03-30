@@ -5,8 +5,10 @@ class LetterboxdStats {
             watchlist: '/api/data?type=watchlist',
             reviews: '/api/data?type=reviews',
             ratings: '/api/data?type=ratings',
-            comments: '/api/data?type=comments'
+            comments: '/api/data?type=comments',
+            statistics: '/api/statistics'  // Add this new endpoint
         };
+        
         
         this.currentView = 'stats';
         this.dataExplorer = new DataExplorer();
@@ -67,11 +69,38 @@ class LetterboxdStats {
         }
     }
 
+    // Add this method to your LetterboxdStats class
+    async processStatistics(statistics) {
+        if (!statistics) return;
+        
+        // Display average runtime
+        if (statistics.average_runtime) {
+            document.getElementById('average-runtime').textContent = 
+                statistics.average_runtime.toFixed(1);
+        }
+        
+        // Display top production countries
+        if (statistics.top_production_countries && statistics.top_production_countries.length > 0) {
+            const topCountries = statistics.top_production_countries
+                .map(country => `${country.country} (${country.count})`)
+                .join(', ');
+            
+            document.getElementById('top-countries').textContent = topCountries || 'None';
+        }
+    }
+
+    // Modify your init method to include statistics
     async init() {
         try {
             this.showLoading();
             const data = await this.loadAllData();
             this.processData(data);
+            
+            // Fetch and process statistics
+            if (data.statistics) {
+                this.processStatistics(data.statistics);
+            }
+            
             this.switchView('stats');
         } catch (error) {
             this.showError(error.message);
