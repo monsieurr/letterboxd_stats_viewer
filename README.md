@@ -30,6 +30,8 @@ Le serveur web (Go) permet de servir les informations qui sont stockées dans un
 
 Lors du premier run, la base de donnée va être créée.
 
+A voir par la suite si j'arrive à réduire / faciliter certaines étapes
+La partie sur les données TMDB pourrait être rendue optionnelle
 
 ## Gestion de la BDD
 ```
